@@ -28,8 +28,8 @@ class Router
 
     public function run()
     {
-        $method = $_REQUEST['REQUEST_METHOD'];
-        $path = $_REQUEST['PATH_INFO'] ?? '/';
+        $method = $_SERVER['REQUEST_METHOD'];
+        $path = $_SERVER['PATH_INFO'] ?? '/';
         $fn = null;
         if ($method === 'get') {
             $fn = $this->getRoutes[$path];
