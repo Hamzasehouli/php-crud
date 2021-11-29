@@ -5,11 +5,11 @@ namespace app\controllers;
 class ViewControllers{
     public static function overview()
     {
-        echo 'overview';
+        
     }
      public static function addUser()
     {
-        echo 'add user';
+        include_once($_SERVER['DOCUMENT_ROOT'] . '/views/_addUser.php');
     }
      public static function updateUser()
     {

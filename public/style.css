@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap");
+:root {
+  --color-primary: red;
+  --color-secondary: blue;
+
+  --color-dark: black;
+  --color-light: white;
+}
+
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.form {
+  width: 40%;
+  margin: 7rem auto;
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 20px rgba(129, 127, 127, 0.301);
+}
+
+.form__control > * {
+  width: 100%;
+  display: block;
+}
+.form__control:not(:last-child) {
+  margin-bottom: 2rem;
+}
+
+.form__label {
+  margin-bottom: 1rem;
+}
+
+.form__input {
+  padding: 0 0.5rem;
+  outline: none;
+  border: none;
+  box-sizing: inherit;
+  border: 1.5px solid rgba(189, 188, 188, 0.377);
+}
+
+.form__input,
+.btn-form {
+  height: 3rem;
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border: none;
+  padding: 0.7rem 4rem;
+  border-radius: 100px;
+}
+
+input {
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.btn-flat {
+  background-color: var(--color-primary) !important;
+  color: white;
+  font-size: inherit;
+}

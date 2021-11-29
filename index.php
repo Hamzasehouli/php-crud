@@ -25,5 +25,6 @@ if (str_starts_with($_SERVER['REQUEST_URI'], '/api/v1/users')) {
 
 $router->get('/', [ViewControllers::class, 'overview']);
 $router->get('/adduser', [ViewControllers::class, 'addUser']);
+$router->post('/adduser', [ViewControllers::class, 'addUser']);
 $router->get('/updateuser', [ViewControllers::class, 'updateUser']);
 $router->run();
