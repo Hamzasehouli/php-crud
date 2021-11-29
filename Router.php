@@ -33,19 +33,24 @@ class Router
         $fn = null;
         if ($method === 'get') {
             $fn = $this->getRoutes[$path];
+            exit;
         }
         if ($method === 'post') {
             $fn = $this->getRoutes[$path];
+            exit;
         }
         if ($method === 'patch') {
             $fn = $this->updateRoutes[$path];
+            exit;
         }
         if ($method === 'delete') {
             $fn = $this->deleteRoutes[$path];
+            exit;
         }
 
         if (!$fn) {
             echo 'No route found with the given route';
+            exit;
         }
     }
 }
