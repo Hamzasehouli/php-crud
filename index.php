@@ -24,4 +24,5 @@ $router->get('/', [ViewControllers::class, 'overview']);
 $router->get('/adduser', [ViewControllers::class, 'addUser']);
 $router->post('/adduser', [ViewControllers::class, 'addUser']);
 $router->get('/updateuser', [ViewControllers::class, 'updateUser']);
+$router->get('/deleteuser', [ViewControllers::class, 'deleteUser']);
 $router->run();

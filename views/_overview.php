@@ -49,7 +49,9 @@ if ($user['image']) {
                 <p class="users__info">Name: <?php echo $user['email'] ?></p>
             </div>
             <div class="users__btns"><a href="/updateuser?userid=<?php echo $user['id'] ?>" style="margin-right: 7px;"
-                    class="btn btn-primary anch">Edit</a><button class="btn btn-danger">Delete</button></div>
+                    class="btn btn-primary anch">Edit</a><a href="/deleteuser?userid=<?php echo $user['id'] ?>"
+                    class="btn btn-danger anch">Delete</a>
+            </div>
         </li>
         <?php endforeach;?>
 
