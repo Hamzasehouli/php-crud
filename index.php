@@ -17,3 +17,7 @@ if (str_starts_with($_SERVER['REQUEST_URI'], '/api/v1/users')) {
     $router->update('/api/v1/users/updateuser', [UserControllers::class, 'updateUser']);
     $router->delete('/api/v1/users/deleteuser', [UserControllers::class, 'deleteUser']);
 }
+
+$router->get('/', [ViewControllers::class, 'home']);
+$router->get('/add', [ViewControllers::class, 'add']);
+$router->get('/edit', [ViewControllers::class, 'edit']);
