@@ -28,6 +28,7 @@ class UserControllers
         $stmt = $con->prepare("SELECT * FROM user WHERE(id=:id)");
         $stmt->bindValue(':id', $id);
         $stmt->execute();
+        $user = $stmt->fetch();
         $row = $stmt->rowCount();
         print_r($row);
         if ($row > 0) {
@@ -35,7 +36,9 @@ class UserControllers
             $stmt1 = $con->prepare("DELETE FROM user WHERE id=:id");
             $stmt1->bindValue(':id', $id);
             if ($stmt1->execute()) {
+                unlink($_SERVER['DOCUMENT_ROOT'] . '/public/images/' . $user['image'] . '.png');
                 header("Location:/");
+
             }
         } else {
             echo 'no user found';
