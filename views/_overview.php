@@ -28,36 +28,31 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <?php
 if (!empty($users)) {?>
     <ul class="users__list">
+        <?php foreach ($users as $user):
+    ?>
         <li class="users__item">
-            <img style="margin-right: 20px;" src="/public/images/4PcAnzeWSMs29UEXXODGu9.png" class="users__img">
+            <?php
+if (!$user['image']) {
+
+        ?>
+            <img style="margin-right: 20px;" src="/public/images/no-user.png" class="users__img">
+            <?php }?>
+            <?php
+if ($user['image']) {
+
+        ?>
+            <img style="margin-right: 20px;" src="/public/images/<?php echo $user['image'] ?>.png" class="users__img">
+            <?php }?>
             <div class="users__details">
-                <p class="users__info">id: 12</p>
-                <p class="users__info">Name: hamza</p>
-                <p class="users__info">Email: hamza@test.com</p>
+                <p class="users__info">id: <?php echo $user['id'] ?></p>
+                <p class="users__info">id: <?php echo $user['name'] ?></p>
+                <p class="users__info">Name: <?php echo $user['email'] ?></p>
             </div>
-            <div class="users__btns"><button style="margin-right: 7px;" class="btn btn-primary">Edit</button><button
-                    class="btn btn-danger">Delete</button></div>
+            <div class="users__btns"><a href="/updateuser?userid=<?php echo $user['id'] ?>" style="margin-right: 7px;"
+                    class="btn btn-primary anch">Edit</a><button class="btn btn-danger">Delete</button></div>
         </li>
-        <li class="users__item">
-            <img style="margin-right: 20px;" src="/public/images/4PcAnzeWSMs29UEXXODGu9.png" class="users__img">
-            <div class="users__details">
-                <p class="users__info">id: 12</p>
-                <p class="users__info">Name: hamza</p>
-                <p class="users__info">Email: hamza@test.com</p>
-            </div>
-            <div class="users__btns"><button style="margin-right: 7px;" class="btn btn-primary">Edit</button><button
-                    class="btn btn-danger">Delete</button></div>
-        </li>
-        <li class="users__item">
-            <img style="margin-right: 20px;" src="/public/images/4PcAnzeWSMs29UEXXODGu9.png" class="users__img">
-            <div class="users__details">
-                <p class="users__info">id: 12</p>
-                <p class="users__info">Name: hamza</p>
-                <p class="users__info">Email: hamza@test.com</p>
-            </div>
-            <div class="users__btns"><button style="margin-right: 7px;" class="btn btn-primary">Edit</button><button
-                    class="btn btn-danger">Delete</button></div>
-        </li>
+        <?php endforeach;?>
+
         <a href="/adduser" style="margin-top: 10px;display:inline-block;" class="btn btn-primary anch" type=button>Add
             user</a>
     </ul>

@@ -14,7 +14,7 @@ class ViewControllers
     }
     public static function updateUser()
     {
-        echo 'updtaes users';
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_updateuser.php';
     }
 
 }

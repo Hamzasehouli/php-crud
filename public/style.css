@@ -106,8 +106,10 @@ input {
 }
 
 .users__img {
-  width: 10rem;
-  height: 10rem;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 1rem;
 }
 
 .users__details {
