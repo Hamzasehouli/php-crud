@@ -42,26 +42,60 @@ class UserControllers
         }
     }
     public static function updateUserTest($id)
-    {print_r($id);
+    {
         $userId = $id;
         extract($_POST);
 
-        // $image = null;
-        // if ($_FILES['image']['tmp_name']) {
-        //     $image = 'llll';
-        // }
+        $imageName = null;
+        if (!empty($_FILES['image']['tmp_name'])) {
+            $generateImageName = function ($num) {
+                $chars = '1234567890QWERTZUIOPLKJHGFDSAYXCVBNMqwertzuioplkjhgfdsayxcvbnm';
+                $imageName = $chars[3];
+                $charsLen = strlen($chars);
+                // echo $randoNum;
+                for ($i = 0; $i <= $num; $i++) {
+                    $randoNum = rand(1, $charsLen);
+                    $imageName .= $chars[$randoNum];
+                }
+                return $imageName;
+            };
+
+            $imageName = $generateImageName(20);
+
+            move_uploaded_file($_FILES["image"]["tmp_name"], $_SERVER['DOCUMENT_ROOT'] . '/public/images/' . $imageName . '.png');
+        }
 
         $con = Database::connect();
         $stmt = $con->prepare("SELECT * FROM user WHERE(id=:id)");
         $stmt->bindValue(':id', $userId);
         $stmt->execute();
+        $user = $stmt->fetch();
+
         $row = $stmt->rowCount();
         if ($row > 0) {
-            $nameValidity = $name ? 'name=:name' : '';
-            $emailValidty = $email ? 'email=:email' : '';
-            // $imageValidiy = $image ? 'image=:image' : '';
-            $query = "UPDATE user SET $nameValidity $emailValidty WHERE id=:id";
-            print_r($query);
+            $sql = '';
+            if ($name) {
+                $sql .= "name=:name ";
+            }
+            if ($email) {
+                $sql .= "email=:email ";
+            }
+            if ($imageName) {
+                $sql .= "image=:image";
+            }
+            // print_r(trim($sql));
+            $arr = explode(' ', trim($sql));
+            $tata = implode(',', $arr);
+            print_r($tata);
+            // print_r($tata);
+            // $imageValidity = $name ? 'name=:name' : '';
+            // $emailValidty = $email ? 'email=:email' : '';
+            // $imageValidiy = $imageName ? 'image=:image' : '';
+
+            // print_r($_POST);
+            $query = "UPDATE user SET $tata WHERE id=:id";
+            // print_r($query);
+
             $stmt1 = $con->prepare($query);
 
             $stmt1->bindValue(':id', $userId);
@@ -73,9 +107,10 @@ class UserControllers
                 $stmt1->bindValue(':email', $email);
             }
 
-            // if (!$_FILES['image']['tmp_name']) {
-            //     $stmt1->bindValue(':image', $image);
-            // }
+            if ($imageName) {
+                $stmt1->bindValue(':image', $imageName);
+                unlink($_SERVER['DOCUMENT_ROOT'] . '/public/images/' . $user['image'] . '.png');
+            }
 
             if ($stmt1->execute()) {
                 header("Location:/");
