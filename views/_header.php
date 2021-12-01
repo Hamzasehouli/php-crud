@@ -1,5 +1,9 @@
 <?php
 session_regenerate_id();
+$isLoggedIn = null;
+if (!empty($_SESSION['isLoggedIn'])) {
+    $isLoggedIn = $_SESSION['isLoggedIn'];
+}
 
 ?>
 <!DOCTYPE html>
@@ -13,7 +17,7 @@ session_regenerate_id();
         <nav class"nav">
             <a href="/">Home</a>
             <ul class="nav__list">
-                <?php if ($_SESSION['isLoggedIn'] === true) {
+                <?php if ($isLoggedIn) {
 
     ?>
 
