@@ -10,6 +10,14 @@ class ViewControllers
     {
         include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_overview.php';
     }
+    public static function login()
+    {
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_login.php';
+    }
+    public static function signup()
+    {
+        include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_signup.php';
+    }
     public static function addUser()
     {
         include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_addUser.php';

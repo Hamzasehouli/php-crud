@@ -44,8 +44,13 @@ if (!empty($_POST)) {
 
         $stmt->execute()
     ) {
-        header("Location:/");
-    }
+        $_POST = [];
+        print_r($_POST);
+        ?>
+<script type='text/javascript'>
+window.location.replace("/");
+</script><?php
+}
 
 }
 
@@ -58,7 +63,7 @@ if (!empty($_POST)) {
 <title>Add a user</title>
 
 <body>
-
+    <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_header.php';?>
     <form method='post' action="/adduser" class="form" enctype="multipart/form-data">
         <div class="form__control">
             <label for="name" class="form__label">Name</label>

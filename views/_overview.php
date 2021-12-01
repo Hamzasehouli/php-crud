@@ -19,6 +19,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <title>Home</title>
 
 <body>
+    <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_header.php';?>
 
     <?php empty($users) ? print_r('There are no users, start adding') : ''?>
     <?php if (empty($users)) {?>
