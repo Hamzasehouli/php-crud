@@ -1,13 +1,18 @@
 <?php
 
-use app\config\Database;
+// use app\config\Database;
 
-$con = Database::connect();
-$query = "SELECT * FROM user";
+// $con = Database::connect();
+// $nn = true;
+// $query = "SELECT * FROM user WHERE active=$nn";
 
-$stmt = $con->prepare($query);
-$stmt->execute();
-$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// $stmt = $con->prepare($query);
+// $stmt->execute();
+// $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+use app\controllers\UserControllers;
+
+$users = UserControllers::getAllUsers();
 
 ?>
 
@@ -20,7 +25,12 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <body>
     <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_header.php';?>
+    <?php
+if (isset($_SESSION)) {
+    if (isset($_SESSION['isLoggedIn'])) {
+        if ($_SESSION['isLoggedIn']) {
 
+            ?>
     <?php empty($users) ? print_r('There are no users, start adding') : ''?>
     <?php if (empty($users)) {?>
     <a href="/adduser" style="margin-top: 10px;display:inline-block;" class="btn btn-primary anch" type=button>Add
@@ -30,18 +40,18 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (!empty($users)) {?>
     <ul class="users__list">
         <?php foreach ($users as $user):
-    ?>
+                ?>
         <li class="users__item">
             <?php
 if (!$user['image']) {
 
-        ?>
+                    ?>
             <img style="margin-right: 20px;" src="/public/images/no-user.png" class="users__img">
             <?php }?>
             <?php
 if ($user['image']) {
 
-        ?>
+                    ?>
             <img style="margin-right: 20px;" src="/public/images/<?php echo $user['image'] ?>.png" class="users__img">
             <?php }?>
             <div class="users__details">
@@ -60,6 +70,17 @@ if ($user['image']) {
             user</a>
     </ul>
     <?php }?>
+    <?php
+}
+    } else {
+
+        header('Location:/login');
+    }
+}
+
+?>
+
+
 </body>
 
 </html>

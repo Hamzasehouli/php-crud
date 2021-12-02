@@ -38,6 +38,7 @@ class AuthControllers
             }
 
             $_SESSION['isLoggedIn'] = true;
+            $_SESSION['email'] = $email;
             header('Location:/');
 
         }
@@ -74,6 +75,7 @@ class AuthControllers
             $stmt->bindValue(':password', $passwordHashed);
             if ($stmt->execute()) {
                 $_SESSION['isLoggedIn'] = true;
+                $_SESSION['email'] = $email;
                 header("Location:/");
             }
         }

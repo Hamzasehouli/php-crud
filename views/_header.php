@@ -27,7 +27,9 @@ if (!empty($_SESSION['isLoggedIn'])) {
                     </form>
                 </li>
                 <li class="nav__item">
-                    <p>user@gmail.com</p>
+                    <p><?php if (isset($_SESSION['email'])) {
+        echo $_SESSION['email'];
+    }?></p>
                 </li>
                 <?php } else {?>
                 <li class="nav__item">

@@ -20,11 +20,31 @@ class ViewControllers
     }
     public static function addUser()
     {
-        include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_addUser.php';
+        if (isset($_SESSION)) {
+            if (isset($_SESSION['isLoggedIn'])) {
+                if ($_SESSION['isLoggedIn']) {
+                    include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_addUser.php';
+                }
+            } else {
+                echo 'fffffffffff';
+                header('Location:/login');
+
+            }
+        }
+
     }
     public static function updateUser()
-    {
-        include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_updateuser.php';
+    {if (isset($_SESSION)) {
+        if (isset($_SESSION['isLoggedIn'])) {
+            if ($_SESSION['isLoggedIn']) {
+                include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_updateuser.php';
+            }
+        } else {
+            echo 'fffffffffff';
+            header('Location:/login');
+
+        }
+    }
     }
     public static function updateUserTest()
     {
@@ -32,7 +52,22 @@ class ViewControllers
     }
     public static function deleteuser()
     {
-        UserControllers::deleteUser($_GET['userid']);
+        if (isset($_SESSION)) {
+            if (isset($_SESSION['isLoggedIn'])) {
+                if ($_SESSION['isLoggedIn']) {
+                    if (isset($_GET['userid'])) {
+
+                        UserControllers::deleteUser($_GET['userid']);
+                    } else {
+                        echo 'no user id has been given';
+                    }
+                }
+            } else {
+                echo 'fffffffffff';
+                header('Location:/login');
+
+            }
+        }
 
     }
 

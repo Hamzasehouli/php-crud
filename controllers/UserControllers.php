@@ -9,7 +9,14 @@ class UserControllers
 
     public static function getAllUsers()
     {
-        echo 'all users';
+
+        $con = Database::connect();
+        $nn = true;
+        $query = "SELECT * FROM user WHERE active=$nn";
+
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
     public static function addUser()
     {
@@ -33,8 +40,9 @@ class UserControllers
         print_r($row);
         if ($row > 0) {
             echo 'there is a user with that id';
-            $stmt1 = $con->prepare("DELETE FROM user WHERE id=:id");
+            $stmt1 = $con->prepare("UPDATE user SET active=:active WHERE id=:id");
             $stmt1->bindValue(':id', $id);
+            $stmt1->bindValue(':active', false);
             if ($stmt1->execute()) {
                 unlink($_SERVER['DOCUMENT_ROOT'] . '/public/images/' . $user['image'] . '.png');
                 header("Location:/");
@@ -43,6 +51,25 @@ class UserControllers
         } else {
             echo 'no user found';
         }
+        // $con = Database::connect();
+        // $stmt = $con->prepare("SELECT * FROM user WHERE(id=:id)");
+        // $stmt->bindValue(':id', $id);
+        // $stmt->execute();
+        // $user = $stmt->fetch();
+        // $row = $stmt->rowCount();
+        // print_r($row);
+        // if ($row > 0) {
+        //     echo 'there is a user with that id';
+        //     $stmt1 = $con->prepare("DELETE FROM user WHERE id=:id");
+        //     $stmt1->bindValue(':id', $id);
+        //     if ($stmt1->execute()) {
+        //         unlink($_SERVER['DOCUMENT_ROOT'] . '/public/images/' . $user['image'] . '.png');
+        //         header("Location:/");
+
+        //     }
+        // } else {
+        //     echo 'no user found';
+        // }
     }
     public static function updateUserTest($id)
     {
