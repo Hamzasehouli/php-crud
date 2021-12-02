@@ -21,12 +21,13 @@ class ViewControllers
     public static function addUser()
     {
         if (isset($_SESSION)) {
-            if (isset($_SESSION['isLoggedIn'])) {
-                if ($_SESSION['isLoggedIn']) {
+            if (isset($_SESSION['isLoggedIn']) && isset($_SESSION['expTime'])) {
+                if ($_SESSION['isLoggedIn'] && $_SESSION['expTime'] > time()) {
                     include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_addUser.php';
                 }
             } else {
                 echo 'fffffffffff';
+                session_destroy();
                 header('Location:/login');
 
             }
@@ -35,12 +36,12 @@ class ViewControllers
     }
     public static function updateUser()
     {if (isset($_SESSION)) {
-        if (isset($_SESSION['isLoggedIn'])) {
-            if ($_SESSION['isLoggedIn']) {
+        if (isset($_SESSION['isLoggedIn']) && isset($_SESSION['expTime'])) {
+            if ($_SESSION['isLoggedIn'] && $_SESSION['expTime'] > time()) {
                 include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_updateuser.php';
             }
         } else {
-            echo 'fffffffffff';
+            session_destroy();
             header('Location:/login');
 
         }
@@ -53,8 +54,8 @@ class ViewControllers
     public static function deleteuser()
     {
         if (isset($_SESSION)) {
-            if (isset($_SESSION['isLoggedIn'])) {
-                if ($_SESSION['isLoggedIn']) {
+            if (isset($_SESSION['isLoggedIn']) && isset($_SESSION['expTime'])) {
+                if ($_SESSION['isLoggedIn'] && $_SESSION['expTime'] > time()) {
                     if (isset($_GET['userid'])) {
 
                         UserControllers::deleteUser($_GET['userid']);
@@ -63,7 +64,7 @@ class ViewControllers
                     }
                 }
             } else {
-                echo 'fffffffffff';
+                session_destroy();
                 header('Location:/login');
 
             }

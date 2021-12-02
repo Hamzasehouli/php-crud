@@ -1,6 +1,19 @@
 <?php
 require_once './vendor/autoload.php';
 session_start();
+if (isset($_SESSION['expTime'])) {
+    // echo 'main';
+    // print_r($_SESSION['expTime']);
+    if ($_SESSION['expTime'] > time()) {
+        $_SESSION['expTime'] = null;
+        $_SESSION['expTime'] = time() + 60;
+        // echo 'after';
+        // print_r($_SESSION['expTime']);
+    } else {
+        session_destroy();
+        header('Location:/login');
+    }
+}
 
 use app\config\Database;
 use app\controllers\AuthControllers;

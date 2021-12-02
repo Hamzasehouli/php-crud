@@ -39,6 +39,7 @@ class AuthControllers
 
             $_SESSION['isLoggedIn'] = true;
             $_SESSION['email'] = $email;
+            $_SESSION['expTime'] = time() + 60;
             header('Location:/');
 
         }
@@ -76,6 +77,7 @@ class AuthControllers
             if ($stmt->execute()) {
                 $_SESSION['isLoggedIn'] = true;
                 $_SESSION['email'] = $email;
+                $_SESSION['expTime'] = time() + 60 * 60;
                 header("Location:/");
             }
         }

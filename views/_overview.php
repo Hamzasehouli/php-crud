@@ -27,8 +27,8 @@ $users = UserControllers::getAllUsers();
     <?php include_once $_SERVER['DOCUMENT_ROOT'] . '/views/_header.php';?>
     <?php
 if (isset($_SESSION)) {
-    if (isset($_SESSION['isLoggedIn'])) {
-        if ($_SESSION['isLoggedIn']) {
+    if (isset($_SESSION['isLoggedIn']) && isset($_SESSION['expTime'])) {
+        if ($_SESSION['isLoggedIn'] && $_SESSION['expTime'] > time()) {
 
             ?>
     <?php empty($users) ? print_r('There are no users, start adding') : ''?>
