@@ -142,9 +142,14 @@ class UserControllers
                 unlink($_SERVER['DOCUMENT_ROOT'] . '/public/images/' . $user['image'] . '.png');
             }
 
-            if ($stmt1->execute()) {
-                header("Location:/");
+            if ($imageName || $email || $name) {
+                if ($stmt1->execute()) {
+                    header("Location:/");
+                }
+            } else {
+                echo 'Please enter at least one field to update data';
             }
+
         } else {
             echo 'no user found';
         }
